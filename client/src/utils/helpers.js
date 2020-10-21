@@ -3,4 +3,10 @@ export function pluralize(name, count) {
     return name
   }
   return name + 's'
-}
+};
+
+export function idbPromise(storeName, method, object) {
+  return new Promise((resolve, reject ) => {
+
+  });
+};
