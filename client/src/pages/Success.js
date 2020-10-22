@@ -8,22 +8,25 @@ function Success() {
     const [addOrder] = useMutation(ADD_ORDER);
 
     useEffect(() => {
-        async function saveOrder() {
-            const cart = await idbPromise('cart', 'get');
-            const products = cart.map(item => item._id);
+      async function saveOrder() {
+        const cart = await idbPromise('cart', 'get');
+        const products = cart.map(item => item._id);
 
-            if (products.length) {
-                const {data} = await addOrder({variables: {products}});
-                const productData = data.addOrder.products;
+        if (products.length) {
+          const {data} = await addOrder({variables: {products}});
+          const productData = data.addOrder.products;
 
-                productData.forEach((item) => {
-                    idbPromise('cart', 'delete', item);
-                });
-            }
+          productData.forEach((item) => {
+              idbPromise('cart', 'delete', item);
+          });
         }
+      }
 
-        saveOrder();
+      saveOrder();
     }, [addOrder]);
+
+    setTimeout (function(){window.location.assign('/')}, 3000);
+
     return (
       <div>
         <Jumbotron>

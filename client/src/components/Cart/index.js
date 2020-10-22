@@ -9,10 +9,11 @@ import { QUERY_CHECKOUT } from '../../utils/queries';
 import { loadStripe } from '@stripe/stripe-js';
 import { useLazyQuery } from '@apollo/react-hooks';
 
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+// const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {
     const [state, dispatch] = useStoreContext();
+    const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
     const [getCheckout, { data }] =useLazyQuery(QUERY_CHECKOUT);
     useEffect(() => {
       async function getCart() {
