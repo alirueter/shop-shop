@@ -5,10 +5,13 @@ import { useStoreContext } from '../../utils/GlobalState';
 import React, { useEffect } from "react";
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
+import { QUERY_CHECKOUT } from '../../utils/queries';
+import { loadStripe } from '@stripe/stripe-js';
+import { useLazyQuery } from '@apollo/react-hooks';
 
 const Cart = () => {
     const [state, dispatch] = useStoreContext();
-    
+    const [getCheckout, { data }] =useLazyQuery(QUERY_CHECKOUT);
     useEffect(() => {
         async function getCart() {
           const cart = await idbPromise('cart', 'get');
@@ -31,6 +34,20 @@ const Cart = () => {
         });
         return sum.toFixed(2);
     };
+
+    function submitCheckout() {
+      const productIds = [];
+
+      state.cart.forEach((item) => {
+        for (let i = 0; i < item.purchaseQuantity; i++) {
+          productIds.push(item._id);
+        }
+      });
+
+      getCheckout({
+        variables: {products: productIds}
+      });
+    }
 
     if (!state.cartOpen) {
         return (
@@ -57,7 +74,7 @@ const Cart = () => {
                 <strong>Total: ${calculateTotal()}</strong>
                 {
                     Auth.loggedIn() ?
-                    <button>
+                    <button onClick={submitCheckout}>
                         Checkout
                     </button>
                     :
