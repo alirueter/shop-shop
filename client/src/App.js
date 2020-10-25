@@ -11,6 +11,8 @@ import Nav from "./components/Nav";
 import { StoreProvider } from "./utils/GlobalState";
 import OrderHistory from "./pages/OrderHistory";
 import Success from './pages/Success';
+import { Provider } from 'react-redux';
+import store from './utils/store';
 
 const client = new ApolloClient({
   request: (operation) => {
@@ -26,7 +28,7 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
+    <Provider store={store}>
       <Router>
         <div>
           <StoreProvider>
@@ -43,7 +45,7 @@ function App() {
           </StoreProvider>
         </div>
       </Router>
-    </ApolloProvider>
+    </Provider>
   );
 }
 
