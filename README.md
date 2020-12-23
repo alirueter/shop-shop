@@ -3,17 +3,13 @@
 ## Description
 Shop-Shop was an existing e-commerce platform that was provided to me in an assignment from the UW Extended Coding Bootcamp. My task was to centralize all of the application's data in state globally to make it easier to share state across the entire application. I also created a shopping cart for the application, added offline functionality, and processed secure online payments with a service called Stripe.
 
-<!-- After learning to manage global state using React's Context API, I refactored the platform so that it uses Redux. -->
-
-
-
 ## Table of Contents
 [Installation](#Installation)  
 [Screenshots](#Screenshots)  
 [Contact](#Contact)
 
 ## [Installation](#Installation)
-To use Shop-Shop, visit https://quiet-anchorage-56583.herokuapp.com/.
+To use Shop-Shop, visit https://shop-shop-00.herokuapp.com/.
 
 ## [Screenshots](#Screenshots)
 This is the initial homepage where you can add items to your cart. You must login to be able to checkout and/or see your Order History.  
